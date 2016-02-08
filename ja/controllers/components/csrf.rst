@@ -1,19 +1,45 @@
-Cross Site Request Forgery
+クロスサイトリクエストフォージェリ
 ###########################
 
-By enabling the CSRF Component you get protection against attacks. `CSRF
-<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ or Cross Site
-Request Forgery is a common vulnerability in web applications. It allows an
-attacker to capture and replay a previous request, and sometimes submit data
-requests using image tags or resources on other domains.
+..
+    Cross Site Request Forgery
 
-The CsrfComponent works by setting a cookie to the user's browser. When forms
-are created with the :php:class:`Cake\\View\\Helper\\FormHelper`, a hidden field
-is added containing the CSRF token. During the ``Controller.startup`` event, if
-the request is a POST, PUT, DELETE, PATCH request the component will compare the
-request data & cookie value. If either is missing or the two values mismatch the
-component will throw a
-:php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
+..
+    By enabling the CSRF Component you get protection against attacks. `CSRF
+    <http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ or Cross Site
+    Request Forgery is a common vulnerability in web applications. It allows an
+    attacker to capture and replay a previous request, and sometimes submit data
+    requests using image tags or resources on other domains.
+
+CSRF Componentを有効にすることにより、攻撃に対するプロテクションを得ることが出来ます。
+`CSRF<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ もしくは「クロスサイトリクエストフォージェリ」は一般的な脆弱性です。
+この脆弱性によって攻撃者は以前のリクエストをキャプチャして再現したり、ときには別ドメインのイメージタグやリソースを使ってデータリクエストをサブミットすることができるのです。
+
+..
+    The CsrfComponent works by setting a cookie to the user's browser. When forms
+    are created with the :php:class:`Cake\\View\\Helper\\FormHelper`, a hidden field
+    is added containing the CSRF token. During the ``Controller.startup`` event, if
+    the request is a POST, PUT, DELETE, PATCH request the component will compare the
+    request data & cookie value. If either is missing or the two values mismatch the
+    component will throw a
+    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
+
+
+CsrfComponentは利用者のブラウザでCookieを有効にすることにより効果を発します。
+:php:class:`Cake\\View\\Helper\\FormHelper` でフォームが作られ、CSRFトークンが含まる隠し要素が追加されます。
+``Controller.startup`` イベント中に、POST,PUT,DELETE,PATCHリクエストがあったときにリクエストデータとCookieの値で比較します。
+もし見つからなかったり2つの値が不一致した場合、CsrfComponentは :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException` を投げます。
+
+
+
+.. 
+    note::
+    You should always verify the HTTP method being used before executing
+    side-effects. You should :ref:`check the HTTP method <check-the-request>` or
+    use :php:meth:`Cake\\Network\\Request::allowMethod()` to ensure the correct
+    HTTP method is used.
+
+
 
 .. note::
     You should always verify the HTTP method being used before executing
