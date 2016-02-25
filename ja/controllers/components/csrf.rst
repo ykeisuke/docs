@@ -12,8 +12,8 @@
     requests using image tags or resources on other domains.
 
 CSRF Componentを有効にすることにより、攻撃に対するプロテクションを得ることが出来ます。
-`CSRF<http://en.wikipedia.org/wiki/Cross-site_request_forgery>`_ もしくは「クロスサイトリクエストフォージェリ」は一般的な脆弱性です。
-この脆弱性によって攻撃者は以前のリクエストをキャプチャして再現したり、ときには別ドメインのイメージタグやリソースを使ってデータリクエストをサブミットすることができるのです。
+`CSRF<https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AD%E3%82%B9%E3%82%B5%E3%82%A4%E3%83%88%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%AA>`_ もしくは「クロスサイトリクエストフォージェリ」は一般的な脆弱性です。
+この脆弱性によって攻撃者は以前のリクエストをキャプチャして再現したり、ときには別ドメインのイメージタグやリソースを使ってデータリクエストをサブミットすることができます。
 
 ..
     The CsrfComponent works by setting a cookie to the user's browser. When forms
@@ -30,34 +30,40 @@ CsrfComponentは利用者のブラウザでCookieを有効にすることによ�
 ``Controller.startup`` イベント中に、POST,PUT,DELETE,PATCHリクエストがあったときにリクエストデータとCookieの値で比較します。
 もし見つからなかったり2つの値が不一致した場合、CsrfComponentは :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException` を投げます。
 
-
-
-.. 
-    note::
+..
+    note
     You should always verify the HTTP method being used before executing
     side-effects. You should :ref:`check the HTTP method <check-the-request>` or
     use :php:meth:`Cake\\Network\\Request::allowMethod()` to ensure the correct
     HTTP method is used.
-
-
 
 .. note::
-    You should always verify the HTTP method being used before executing
-    side-effects. You should :ref:`check the HTTP method <check-the-request>` or
-    use :php:meth:`Cake\\Network\\Request::allowMethod()` to ensure the correct
-    HTTP method is used.
+    あなたはHTTPが副作用を実行中となる前に毎回確かめるべきである。
+    あなたは :ref:`check the HTTP method <check-the-request>` か :php:meth:`Cake\\Network\\Request::allowMethod()` を使いHTTPメソッドが使われることを確保するべきである。
 
-.. versionadded:: 3.1
-
+..
+    versionadded 3.1
     The exception type changed from
     :php:class:`Cake\\Network\\Exception\\ForbiddenException` to
     :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException`.
 
-Using the CsrfComponent
+
+.. versionadded:: 3.1
+
+    Exceptionの種類が
+    :php:class:`Cake\\Network\\Exception\\ForbiddenException` から
+    :php:class:`Cake\\Network\\Exception\\InvalidCsrfTokenException` に変更されました。
+
+
+CsrfComponentの使い方
 =======================
 
-Simply by adding the ``CsrfComponent`` to your components array,
-you can benefit from the CSRF protection it provides::
+..
+    Simply by adding the ``CsrfComponent`` to your components array,
+    you can benefit from the CSRF protection it provides
+
+
+``CsrfComponent`` を追加することによりCSRF対策を約束することができます。 ::
 
     public function initialize()
     {
@@ -65,17 +71,49 @@ you can benefit from the CSRF protection it provides::
         $this->loadComponent('Csrf');
     }
 
-Settings can be passed into the component through your component's settings.
-The available configuration options are:
+..
+    Settings can be passed into the component through your component's settings.
+    The available configuration options are:
 
-- ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
-- ``expiry`` How long the CSRF token should last. Defaults to browser session.
-  Accepts ``strtotime`` values as of 3.1
+
+そのComponentを通過する設定をあなたのComponentで設定できます。
+オプションを設定することにより得られる事：
+
+..
+    ``cookieName`` The name of the cookie to send. Defaults to ``csrfToken``.
+    ``expiry`` How long the CSRF token should last. Defaults to browser session.
+    Accepts ``strtotime`` values as of 3.1
+    ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
+    the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
+    will fail. Defaults to ``false``.
+    ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
+    will also require configuring FormHelper.
+
+- ``cookieName`` 送信されるCookieの名称です。デフォルトは``csrfToken``です。
+- ``expiry`` CSRFトークンが有効な期間です。デフォルトはブラウザセッションです。3.1現在で ``strtotime`` に対応しています。
 - ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
   the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
   will fail. Defaults to ``false``.
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 When enabled, you can access the current CSRF token on the request object::
 
