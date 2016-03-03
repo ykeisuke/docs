@@ -91,29 +91,9 @@ CsrfComponentの使い方
 
 - ``cookieName`` 送信されるCookieの名称です。デフォルトは``csrfToken``です。
 - ``expiry`` CSRFトークンが有効な期間です。デフォルトはブラウザセッションです。3.1以降で ``strtotime`` に対応しています。
-- ``secure`` Whether or not the cookie will be set with the Secure flag. That is,
-  the cookie will only be set on a HTTPS connection and any attempt over normal HTTP
-  will fail. Defaults to ``false``.
+- ``secure`` Cookieがセキュアフラグと共にセットされるかどうかです。 つまり、HTTPSコネクションのときだけCookieがセットされます、また通常のHTTPを用いた場合は失敗します。デフォルトは ``false`` です。
 - ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
   will also require configuring FormHelper.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 When enabled, you can access the current CSRF token on the request object::
 
