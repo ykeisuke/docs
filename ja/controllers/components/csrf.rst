@@ -59,6 +59,9 @@ CsrfComponentの使い方
 =======================
 
 ..
+    Using the CsrfComponent
+
+..
     Simply by adding the ``CsrfComponent`` to your components array,
     you can benefit from the CSRF protection it provides
 
