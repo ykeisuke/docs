@@ -91,11 +91,14 @@ CsrfComponentの使い方
 
 - ``cookieName`` 送信されるCookieの名称です。デフォルトは``csrfToken``です。
 - ``expiry`` CSRFトークンが有効な期間です。デフォルトはブラウザセッションです。3.1以降で ``strtotime`` に対応しています。
-- ``secure`` Cookieがセキュアフラグと共にセットされるかどうかです。 つまり、HTTPSコネクションのときだけCookieがセットされます、また通常のHTTPを用いた場合は失敗します。デフォルトは ``false`` です。
-- ``field`` The form field to check. Defaults to ``_csrfToken``. Changing this
-  will also require configuring FormHelper.
+- ``secure`` trueならセキュアフラグつきでCookieをセットされます。つまり、HTTPS接続のときだけCookieがセットされます、また通常のHTTPで接続しようとした場合は、どんな接続でも失敗します。デフォルトは ``false`` です。
+- ``field`` フォームのチェックです。デフォルトは ``_csrfToken`` です。これを変更するとフォームヘルパーでの設定が必要となるでしょう。
 
-When enabled, you can access the current CSRF token on the request object::
+..
+    When enabled, you can access the current CSRF token on the request object
+    $token = $this->request->param('_csrfToken');
+
+有効になったとき、リクエストオブジェクト上にある現在のCSRFトークンにあなたはアクセスできます。::
 
     $token = $this->request->param('_csrfToken');
 
