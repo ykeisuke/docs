@@ -105,12 +105,24 @@ CsrfComponentの使い方
 
     $token = $this->request->param('_csrfToken');
 
-Integration with FormHelper
-===========================
+フォームヘルパーとの統合
+==========================
 
-The CsrfComponent integrates seamlessly with ``FormHelper``. Each time you
-create a form with FormHelper, it will insert a hidden field containing the CSRF
-token.
+..
+    Integration with FormHelper
+
+..
+    The CsrfComponent integrates seamlessly with ``FormHelper``. Each time you
+    create a form with FormHelper, it will insert a hidden field containing the CSRF
+    token.
+
+
+
+
+The CsrfComponent integrates seamlessly with ``FormHelper``.
+Each time you create a form with FormHelper, it will insert a hidden field containing the CSRF token.
+
+
 
 .. note::
 
