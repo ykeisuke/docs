@@ -117,10 +117,8 @@ CsrfComponentの使い方
     token.
 
 
-
-
-The CsrfComponent integrates seamlessly with ``FormHelper``.
-Each time you create a form with FormHelper, it will insert a hidden field containing the CSRF token.
+CSRF ComponentはFormHelperとスムーズな連係をします。
+CSRFtokenを含む隠れたフィールドを追加できる、FormHelperをいつでも作れます。
 
 
 
