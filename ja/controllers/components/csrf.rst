@@ -121,12 +121,20 @@ CSRF ComponentはFormHelperとスムーズな連係をします。
 CSRFtokenを含む隠れたフィールドを追加できる、FormHelperをいつでも作れます。
 
 
+..
+    note::
 
-.. note::
-
+..
     When using the CsrfComponent you should always start your forms with the
     FormHelper. If you do not, you will need to manually create hidden inputs in
     each of your forms.
+
+
+
+When using the CsrfComponent you should always start your forms with the
+    FormHelper. If you do not, you will need to manually create hidden inputs in
+    each of your forms.
+
 
 CSRF Protection and AJAX Requests
 ==================================
